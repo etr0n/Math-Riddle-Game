@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+            <variable
+                name="viewmodel"
+                type="com.example.mathriddles.LViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".StartFragment">
+
+        <Button
+            android:id="@+id/play_btn"
+            android:layout_width="170dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="80dp"
+            android:text="Play"
+            app:backgroundTint="#845fb3"
+            app:icon="@android:drawable/ic_media_play"
+            app:layout_constraintBottom_toTopOf="@+id/AllLevels_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MathRiddles_TextView" />
+
+        <Button
+            android:id="@+id/AllLevels_btn"
+            android:layout_width="170dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="25dp"
+            android:text="Levels"
+            app:backgroundTint="#845fb3"
+            app:icon="@android:drawable/ic_dialog_dialer"
+            app:layout_constraintBottom_toTopOf="@+id/stat_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/play_btn" />
+
+        <Button
+            android:id="@+id/stat_btn"
+            android:layout_width="170dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="25dp"
+            android:text="Statistics"
+            app:backgroundTint="#845fb3"
+            app:icon="?android:attr/actionModeFindDrawable"
+            app:layout_constraintBottom_toTopOf="@+id/restart_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/AllLevels_btn" />
+
+        <Button
+            android:id="@+id/restart_btn"
+            android:layout_width="170dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="180dp"
+            android:text="Restart"
+            app:backgroundTint="#845fb3"
+            app:icon="@android:drawable/stat_notify_sync"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stat_btn" />
+
+        <TextView
+            android:id="@+id/MathRiddles_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="164dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="164dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Math Riddles"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/play_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

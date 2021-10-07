@@ -103,6 +103,8 @@ class LevelFragment : Fragment()  {
 
         return view
     }
+
+
     fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
         val formatter = SimpleDateFormat(format, locale)
         return formatter.format(this)

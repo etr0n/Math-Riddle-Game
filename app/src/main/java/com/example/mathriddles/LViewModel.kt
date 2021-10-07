@@ -61,154 +61,10 @@ class LViewModel(context: Context): ViewModel(){
                                     ""
                             ),
                             Level(
-                                    5,
-                                    "Numbers increase in a clockwise direction",
-                                    3,
-                                    R.drawable.lvl5,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    6,
-                                    "x2",
-                                    32,
-                                    R.drawable.lvl6,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    7,
-                                    "+",
-                                    85,
-                                    R.drawable.lvl7,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    8,
-                                    "-",
-                                    10,
-                                    R.drawable.lvl8,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    9,
-                                    "x3-4",
-                                    29,
-                                    R.drawable.lvl9,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    10,
-                                    "Numbers increase in a clockwise direction",
-                                    15,
-                                    R.drawable.lvl10,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    11,
-                                    "x2+1",
-                                    63,
-                                    R.drawable.lvl11,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    12,
-                                    "-",
-                                    5,
-                                    R.drawable.lvl12,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    13,
-                                    "+",
-                                    55,
-                                    R.drawable.lvl13,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    14,
-                                    "x2+2",
-                                    86,
-                                    R.drawable.lvl14,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    15,
-                                    "Numbers increase in a clockwise direction",
-                                    9,
-                                    R.drawable.lvl15,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    16,
-                                    "ABCD",
-                                    2150,
-                                    R.drawable.lvl16,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    17,
-                                    "+1 & multiplication",
-                                    80,
-                                    R.drawable.lvl17,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    18,
-                                    "+",
-                                    65,
-                                    R.drawable.lvl18,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    19,
-                                    "x6+6",
-                                    1122,
-                                    R.drawable.lvl19,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                                    20,
-                                    "Numbers increase in a clockwise direction",
-                                    16,
-                                    R.drawable.lvl20,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                            21,
+                            5,
                             "21",
                             21,
-                            R.drawable.lvl2,
+                            R.drawable.lvl5,
                             false,
                             0,
                             ""
@@ -241,13 +97,13 @@ class LViewModel(context: Context): ViewModel(){
 
         viewModelScope.launch {
             try {
-                val indicator = database.Dao().getIdTrue(true)
+                val getId = database.Dao().getIdTrue(true)
                 var i = database.Dao().getCount()
 
-                if(i == indicator){
+                if(i == getId){
                     result.postValue(-1)
                 }
-                else  result.postValue(indicator)
+                else  result.postValue(getId)
 
             }
             catch (e: NullPointerException){

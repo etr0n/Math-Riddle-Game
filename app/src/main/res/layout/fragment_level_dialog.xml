@@ -31,16 +31,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_hint_ad" />
 
-    <Button
-        android:id="@+id/button_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="159dp"
-        android:text="Close"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_solution_ad" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

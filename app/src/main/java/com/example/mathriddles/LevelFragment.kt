@@ -48,9 +48,7 @@ class LevelFragment : Fragment()  {
 
 
             view.findViewById<ImageButton>(R.id.hint_btn).setOnClickListener {
-                LevelDialogFragment(returnedLevel.hint).show(childFragmentManager, LevelDialogFragment.TAG)
-                /*customDialogFunction(returnedLevel.hint)*/
-
+              LevelDialogFragment(returnedLevel.hint).show(childFragmentManager, LevelDialogFragment.TAG)
 
             }
             view.findViewById<TextView>(R.id.number_textView).text = args.Id.toString()
@@ -118,19 +116,7 @@ class LevelFragment : Fragment()  {
     fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time
     }
-/*    fun customDialogFunction(hint: String) {
 
-        val customDialog = this.context?.let { Dialog(it) }
-        customDialog?.setContentView(R.layout.fragment_level_dialog)
-
-
-        view?.findViewById<Button>(R.id.button_close)?.setOnClickListener {
-
-            Toast.makeText(context, "clicked submit", Toast.LENGTH_LONG).show()
-
-        }
-        customDialog?.show()
-    }*/
 
 
 

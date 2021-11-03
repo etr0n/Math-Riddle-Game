@@ -21,19 +21,22 @@ import androidx.navigation.fragment.findNavController
 class LevelDialogFragment(var hint: String) : DialogFragment() {
 
     init {
-        setCancelable(false)
+        isCancelable = false
     }
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
 
         return AlertDialog.Builder(requireContext())
-
+            .setView(R.layout.fragment_level_dialog)
             .setTitle("Need help?")
                 .setMessage(hint)
-            .setNeutralButton("Got it!") { dialog, id ->
+            .setNeutralButton("Got it!") { dialog, _ ->
                 dialog.dismiss()
             }.show()
+
+
+
     }
 
     companion object {

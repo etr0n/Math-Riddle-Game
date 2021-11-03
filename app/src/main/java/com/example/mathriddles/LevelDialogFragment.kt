@@ -20,14 +20,18 @@ import androidx.navigation.fragment.findNavController
 
 class LevelDialogFragment(var hint: String) : DialogFragment() {
 
+    init {
+        setCancelable(false)
+    }
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
 
         return AlertDialog.Builder(requireContext())
+
             .setTitle("Need help?")
                 .setMessage(hint)
-            .setNegativeButton("Got it!") { dialog, id ->
+            .setNeutralButton("Got it!") { dialog, id ->
                 dialog.dismiss()
             }.show()
     }

@@ -1,5 +1,8 @@
 package com.example.mathriddles
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -46,6 +49,8 @@ class LevelFragment : Fragment()  {
 
             view.findViewById<ImageButton>(R.id.hint_btn).setOnClickListener {
                 LevelDialogFragment(returnedLevel.hint).show(childFragmentManager, LevelDialogFragment.TAG)
+                /*customDialogFunction(returnedLevel.hint)*/
+
 
             }
             view.findViewById<TextView>(R.id.number_textView).text = args.Id.toString()
@@ -88,35 +93,18 @@ class LevelFragment : Fragment()  {
                             balas=balas-1
 
                         }
-
-
-
-
-
-
-
                     }
-
-
                 }
                 catch (e: NumberFormatException ){
                    val answer = 0
                     view.findViewById<TextView>(R.id.Error_textView).text = "Wrong. Try Again!"
                 }
-
-
             }
-
-
         })
-
 
         view.findViewById<ImageButton>(R.id.LevelBack_btn).setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_levelFragment_to_startFragment)
         }
-
-
-
 
         return view
     }
@@ -130,6 +118,22 @@ class LevelFragment : Fragment()  {
     fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time
     }
+/*    fun customDialogFunction(hint: String) {
+
+        val customDialog = this.context?.let { Dialog(it) }
+        customDialog?.setContentView(R.layout.fragment_level_dialog)
+
+
+        view?.findViewById<Button>(R.id.button_close)?.setOnClickListener {
+
+            Toast.makeText(context, "clicked submit", Toast.LENGTH_LONG).show()
+
+        }
+        customDialog?.show()
+    }*/
+
 
 
 }
+
+

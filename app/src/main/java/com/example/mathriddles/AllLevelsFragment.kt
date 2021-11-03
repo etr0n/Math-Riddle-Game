@@ -31,7 +31,7 @@ import androidx.navigation.findNavController
 
         val viewModel: LViewModel by viewModels{ViewModelFactory(requireContext())}
 
-        viewModel.getlevel(1).observe(viewLifecycleOwner, { returnedLevel ->
+        viewModel.getlevel(1).observe(viewLifecycleOwner, Observer { returnedLevel ->
           if(returnedLevel.indicator){
               view.findViewById<Button>(R.id.lvl1_btn).isEnabled = true
           }})

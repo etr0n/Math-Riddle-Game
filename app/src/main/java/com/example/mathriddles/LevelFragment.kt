@@ -53,7 +53,8 @@ class LevelFragment : Fragment()  {
 
             val meter = view.findViewById<Chronometer>(R.id.c_meter)
             meter.start()
-
+            var balas = 10;
+            var klaidu_kiekis = 0;
             view.findViewById<Button>(R.id.submit_btn).setOnClickListener {
                 try {
                     val answer: Int = view.findViewById<EditText>(R.id.answer_textField).text.toString().toInt()
@@ -72,14 +73,30 @@ class LevelFragment : Fragment()  {
                         else best = m
 
 
-                        val action = LevelFragmentDirections.actionLevelFragmentToSummaryFragment(m)
+                        val action = LevelFragmentDirections.actionLevelFragmentToSummaryFragment(m,balas)
                         view.findNavController().navigate(action)
 
                         viewModel.updateIndicator(args.Id, best, dateInString)
 
 
                     } else {
-                        view.findViewById<TextView>(R.id.Error_textView).text = "Wrong. Try Again!"}
+                        view.findViewById<TextView>(R.id.Error_textView).text = "Wrong. Try Again!"
+                        klaidu_kiekis+=1
+                        view.findViewById<TextView>(R.id.textView4_kiekis).text = "Errors made "+klaidu_kiekis.toString()
+                        if(balas > 0)
+                        {
+                            balas=balas-1
+
+                        }
+
+
+
+
+
+
+
+                    }
+
 
                 }
                 catch (e: NumberFormatException ){

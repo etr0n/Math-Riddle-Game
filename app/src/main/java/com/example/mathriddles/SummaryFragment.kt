@@ -23,7 +23,17 @@ class SummaryFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_summary, container, false)
         val args = SummaryFragmentArgs.fromBundle(requireArguments())
 
+
+
+        if(args.balas > 0){
+            view.findViewById<TextView>(R.id.textView4_balas).text = "Your mark: " + args.balas.toString()+ " / 10"
+        }
+        else
+            view.findViewById<TextView>(R.id.textView4_balas).text = "Very very bad..."
+
+
         view.findViewById<TextView>(R.id.timer_textView).text = convertLongToTime(args.timer)
+
 
         view.findViewById<Button>(R.id.nextlvl_btn).setOnClickListener{
 

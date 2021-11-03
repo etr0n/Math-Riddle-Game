@@ -140,5 +140,20 @@ class LViewModel(context: Context): ViewModel(){
         }
         return result
     }
+    fun insertStatistic(time:Long, date: String, mistakes : Int, levelId:Int ){
+        viewModelScope.launch {
+            database.Dao().insertStatistics(
+                    Statistic(
+                        0,
+                      levelId,
+                        date,
+                        time,
+                        mistakes
+                    )
+
+
+            )
+        }
+    }
 
 }

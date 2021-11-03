@@ -77,6 +77,7 @@ class LevelFragment : Fragment()  {
                         view.findNavController().navigate(action)
 
                         viewModel.updateIndicator(args.Id, best, dateInString)
+                        viewModel.insertStatistic(m,dateInString,klaidu_kiekis,returnedLevel.levelId)
 
 
                     } else {

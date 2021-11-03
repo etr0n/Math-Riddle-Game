@@ -1,8 +1,10 @@
 package com.example.mathriddles
 
 import androidx.annotation.DrawableRes
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.Relation
 
 @Entity
  data class Level (
@@ -13,4 +15,22 @@ import androidx.room.PrimaryKey
      val indicator : Boolean,
      val bestTime : Long,
      val date : String
+)
+
+@Entity
+data class Statistic(
+    @PrimaryKey(autoGenerate = true) val statisticsId: Int,
+    val levelTimeId : Int,
+    val date : String,
+    val time : Long,
+    val mistakes : Int
+)
+
+data class LevelWithStatistics(
+    @Embedded val level : Level,
+    @Relation(
+        parentColumn = "levelId",
+        entityColumn = "levelTimeId"
+    )
+    val statistics: List<Statistic>
 )

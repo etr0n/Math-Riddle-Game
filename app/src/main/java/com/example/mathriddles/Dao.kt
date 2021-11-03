@@ -39,10 +39,10 @@ interface Dao {
     @Query("SELECT * FROM Level")
     suspend fun getLevelsWithStatistics():List<LevelWithStatistics>
 
-    @Query("SELECT * FROM statistic WHERE levelTimeId = :id ")
-    suspend fun getStatistics(id: Int): List<Statistic>
+    @Query("SELECT * FROM statistics WHERE levelTimeId = :id ")
+    suspend fun getStatistics(id: Int): List<Statistics>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertStatistics( statistic: Statistic)
+    suspend fun insertStatistics( statistics: Statistics)
 
 }

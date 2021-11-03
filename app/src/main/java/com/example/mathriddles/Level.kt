@@ -18,7 +18,7 @@ import androidx.room.Relation
 )
 
 @Entity
-data class Statistic(
+data class Statistics(
     @PrimaryKey(autoGenerate = true) val statisticsId: Int,
     val levelTimeId : Int,
     val date : String,
@@ -32,5 +32,5 @@ data class LevelWithStatistics(
         parentColumn = "levelId",
         entityColumn = "levelTimeId"
     )
-    val statistics: List<Statistic>
+    val statistics: List<Statistics>
 )

@@ -143,17 +143,23 @@ class LViewModel(context: Context): ViewModel(){
     fun insertStatistic(time:Long, date: String, mistakes : Int, levelId:Int ){
         viewModelScope.launch {
             database.Dao().insertStatistics(
-                    Statistic(
+                    Statistics(
                         0,
                       levelId,
                         date,
                         time,
                         mistakes
                     )
-
-
             )
         }
+    }
+    fun getStatistic(id:Int):LiveData<List<Statistics>> {
+        val result = MutableLiveData<List<Statistics>>()
+        viewModelScope.launch {
+           val returnedStatistics = database.Dao().getStatistics(id)
+           result.postValue(returnedStatistics)
+        }
+        return result
     }
 
 }

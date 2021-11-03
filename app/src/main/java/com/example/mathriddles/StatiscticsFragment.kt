@@ -12,7 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import org.w3c.dom.Text
+import com.example.mathriddles.databinding.FragmentLevelBinding
+import com.example.mathriddles.databinding.FragmentStatiscticsBinding
 
 
 class StatiscticsFragment : Fragment() {
@@ -23,11 +24,16 @@ class StatiscticsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_statisctics, container, false)
         val viewModel: LViewModel by viewModels { ViewModelFactory(requireContext()) }
 
+      // val binding = FragmentStatiscticsBinding.inflate(inflater)
+
         view.findViewById<ImageButton>(R.id.statiscticsBack_btn).setOnClickListener{
             val action = StatiscticsFragmentDirections.actionStatiscticsFragmentToStartFragment()
             view.findNavController().navigate(action)
         }
         val recycler = view.findViewById(R.id.recyclerView) as RecyclerView
+     // val adapter = LAdapter(LAdapter.LevelClickListener{
+     // })
+
 
 
 
@@ -38,8 +44,9 @@ class StatiscticsFragment : Fragment() {
                 view.findViewById<TextView>(R.id.lvl_textView).text = "LVL"
                 view.findViewById<TextView>(R.id.datetimestats_textView).text = "Date & time"
                 view.findViewById<TextView>(R.id.bestscore_textView).text = "Best score"
-                recycler.adapter = LAdapter(returnedLevel)
+               // recycler.adapter = LAdapter(returnedLevel)
 
+                //binding.recyclerView.adapter = adapter
             }
             else view.findViewById<TextView>(R.id.noData_textView).text = "No data found"
 

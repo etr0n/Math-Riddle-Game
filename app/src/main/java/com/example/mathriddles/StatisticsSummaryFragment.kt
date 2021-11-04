@@ -20,6 +20,8 @@ class StatisticsSummaryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_statistics_summary, container, false)
+        val args = StatisticsSummaryFragmentArgs.fromBundle(requireArguments())
+
         val viewModel: LViewModel by viewModels { ViewModelFactory(requireContext()) }
 
         view.findViewById<ImageButton>(R.id.statiscticssummaryBack_btn).setOnClickListener{
@@ -28,10 +30,10 @@ class StatisticsSummaryFragment : Fragment() {
         }
         val recycler = view.findViewById(R.id.recyclerViewStatSummary) as RecyclerView
 
-        viewModel.getStatistic(1).observe(viewLifecycleOwner, Observer {returnedStatistics ->
+        viewModel.getStatistic(args.id).observe(viewLifecycleOwner, Observer {returnedStatistics ->
 
             recycler.adapter = SAdapter(returnedStatistics)
-            recycler.adapter?.notifyDataSetChanged()
+            //recycler.adapter?.notifyDataSetChanged()
         })
 
 

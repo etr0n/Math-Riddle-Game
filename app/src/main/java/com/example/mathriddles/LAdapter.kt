@@ -1,51 +1,58 @@
 package com.example.mathriddles
 
+
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mathriddles.databinding.ItemBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
-class LAdapter (private val clickListener: LevelClickListener):
-    ListAdapter<Level, LAdapter.ViewHolder>(LevelDiffCallback()){
+class LAdapter(val levels: List<Level>, private val onClick:((levelId:Int)->Unit)? = null) :
+        RecyclerView.Adapter<LAdapter.ViewHolder>() {
 
-    class ViewHolder(private  val binding: ItemBinding)
-        : RecyclerView.ViewHolder(binding.root){
-        fun bind(level: Level,clickListener: LevelClickListener){
-            binding.level = level
-            binding.clickListener = clickListener
-        }
-    }
-    class LevelDiffCallback : DiffUtil.ItemCallback<Level>() {
-        override fun areItemsTheSame(oldItem: Level, newItem: Level): Boolean {
-            return oldItem.levelId == newItem.levelId
-        }
-
-        override fun areContentsTheSame(oldItem: Level, newItem: Level): Boolean {
-            return oldItem == newItem
-        }
-
-    }
-    class LevelClickListener( val clickListener: (level: Level)-> Unit){
-        fun onClick(level: Level) {
-            clickListener(level)
-        }
+    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        val levelText = view.findViewById(R.id.levelItem_TextView) as TextView
+        val dateText = view.findViewById(R.id.dateItem_textView) as TextView
+        val bestTimeText = view.findViewById(R.id.bestTimeItem_textView) as TextView
+        val button = view.findViewById<ImageButton>(R.id.stat_button)!!
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ViewHolder {
-        return ViewHolder(
-            ItemBinding.inflate(
-                LayoutInflater.from(parent.context)
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false))
+    }
+    override fun getItemCount(): Int{
+
+        return levels.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position), clickListener)
+        val data = levels[position]
+        val time = convertLongToTime(data.bestTime)
+        holder.levelText.text = data.levelId.toString()
+        holder.dateText.text = data.date
+        holder.bestTimeText.text = time
+
+        holder.button.setOnClickListener{
+           when(position){
+                data.levelId-1 -> {
+                    onClick?.invoke(data.levelId)
+                }
+                else -> return@setOnClickListener
+           }
+        }
+
     }
+    private fun convertLongToTime(time: Long): String {
+        val date = Date(time)
+        val format = SimpleDateFormat("mm:ss")
+        return format.format(date)
+    }
+
+
+
 
 }

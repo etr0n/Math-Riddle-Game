@@ -161,5 +161,9 @@ class LViewModel(context: Context): ViewModel(){
         }
         return result
     }
-
+    fun deleteStatistic(){
+        viewModelScope.launch {
+            database.Dao().deleteStatistics()
+        }
+    }
 }

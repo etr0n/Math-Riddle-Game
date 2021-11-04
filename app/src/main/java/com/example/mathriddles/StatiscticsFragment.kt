@@ -24,17 +24,13 @@ class StatiscticsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_statisctics, container, false)
         val viewModel: LViewModel by viewModels { ViewModelFactory(requireContext()) }
 
-      // val binding = FragmentStatiscticsBinding.inflate(inflater)
+
 
         view.findViewById<ImageButton>(R.id.statiscticsBack_btn).setOnClickListener{
             val action = StatiscticsFragmentDirections.actionStatiscticsFragmentToStartFragment()
             view.findNavController().navigate(action)
         }
         val recycler = view.findViewById(R.id.recyclerView) as RecyclerView
-     // val adapter = LAdapter(LAdapter.LevelClickListener{
-     // })
-
-
 
 
         viewModel.getAllLevel().observe(viewLifecycleOwner, Observer { returnedLevel ->
@@ -44,14 +40,17 @@ class StatiscticsFragment : Fragment() {
                 view.findViewById<TextView>(R.id.lvl_textView).text = "LVL"
                 view.findViewById<TextView>(R.id.datetimestats_textView).text = "Date & time"
                 view.findViewById<TextView>(R.id.bestscore_textView).text = "Best score"
-               // recycler.adapter = LAdapter(returnedLevel)
 
-                //binding.recyclerView.adapter = adapter
+                val adapter = LAdapter(returnedLevel, onClick = {it -> view.findNavController().navigate(StatiscticsFragmentDirections
+                        .actionStatiscticsFragmentToStatisticsSummaryFragment(it))} )
+                recycler.adapter = adapter
+
+
             }
             else view.findViewById<TextView>(R.id.noData_textView).text = "No data found"
 
         })
-        recycler.adapter?.notifyDataSetChanged()
+       // recycler.adapter?.notifyDataSetChanged()
 
         return view
     }

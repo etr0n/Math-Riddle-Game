@@ -45,4 +45,7 @@ interface Dao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStatistics( statistics: Statistics)
 
+    @Query("DELETE FROM Statistics")
+    suspend fun deleteStatistics()
+
 }

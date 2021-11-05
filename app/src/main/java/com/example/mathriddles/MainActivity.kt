@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.viewModels
-import com.example.mathriddles.LevelDialogFragment.Companion.TAG
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds

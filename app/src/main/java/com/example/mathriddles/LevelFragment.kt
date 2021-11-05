@@ -1,14 +1,9 @@
 package com.example.mathriddles
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.SystemClock
-import android.text.format.DateFormat.format
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,30 +11,26 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.google.android.gms.ads.*
-import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
-import java.lang.String.format
-import java.text.DateFormat
-import java.text.DateFormat.MINUTE_FIELD
-import java.text.Format
-import java.text.MessageFormat.format
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class LevelFragment() : Fragment() , LevelDialogFragment {
+class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
 
     val AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917"
-    val TAG = "MainActivity"
+    val TAG = "LevelFragment"
     private var mRewardedAd: RewardedAd? = null
     private var mIsLoading = false
+    var hint = ""
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -53,20 +44,21 @@ class LevelFragment() : Fragment() , LevelDialogFragment {
         MobileAds.initialize(requireContext()) {}
 
 
-
-
-
-        val viewModel: LViewModel by viewModels{ViewModelFactory(requireContext())}
+        val viewModel: LViewModel by viewModels { ViewModelFactory(requireContext()) }
 
         viewModel.getlevel(args.Id).observe(viewLifecycleOwner, Observer { returnedLevel ->
             val image: ImageView = view.findViewById(R.id.riddle_imageView)
             image.setImageResource(returnedLevel.image)
-
+            loadRewardedAd()
 
             view.findViewById<ImageButton>(R.id.hint_btn).setOnClickListener {
-                loadRewardedAd()
-             /* LevelDialogFragment(returnedLevel.hint).show(childFragmentManager, LevelDialogFragment.TAG)*/
+
+                hint = returnedLevel.hint
+              /*  showRewardedVideo()*/
                 onCreateDialog()
+
+
+
             }
             view.findViewById<TextView>(R.id.number_textView).text = args.Id.toString()
 
@@ -81,19 +73,17 @@ class LevelFragment() : Fragment() , LevelDialogFragment {
 
                     if (answer == returnedLevel.answer) {
                         meter.stop()
-                        val m  = SystemClock.elapsedRealtime() - meter.base;
+                        val m = SystemClock.elapsedRealtime() - meter.base;
                         ///
                         val date = getCurrentDateTime()
                         val dateInString = date.toString("yyyy/MM/dd    HH:mm")
-                        var best:Long
-                        if(returnedLevel.bestTime <= m && returnedLevel.bestTime.toInt() != 0)
-                        {
+                        var best: Long
+                        if (returnedLevel.bestTime <= m && returnedLevel.bestTime.toInt() != 0) {
                             best = returnedLevel.bestTime
-                        }
-                        else best = m
+                        } else best = m
 
 
-                        val action = LevelFragmentDirections.actionLevelFragmentToSummaryFragment(m,balas)
+                        val action = LevelFragmentDirections.actionLevelFragmentToSummaryFragment(m, balas)
                         view.findNavController().navigate(action)
 
                         viewModel.updateIndicator(args.Id, best, dateInString)
@@ -101,17 +91,15 @@ class LevelFragment() : Fragment() , LevelDialogFragment {
 
                     } else {
                         view.findViewById<TextView>(R.id.Error_textView).text = "Wrong. Try Again!"
-                        klaidu_kiekis+=1
-                        view.findViewById<TextView>(R.id.textView4_kiekis).text = "Errors made "+klaidu_kiekis.toString()
-                        if(balas > 0)
-                        {
-                            balas=balas-1
+                        klaidu_kiekis += 1
+                        view.findViewById<TextView>(R.id.textView4_kiekis).text = "Errors made " + klaidu_kiekis.toString()
+                        if (balas > 0) {
+                            balas -= 1
 
                         }
                     }
-                }
-                catch (e: NumberFormatException ){
-                   val answer = 0
+                } catch (e: NumberFormatException) {
+                    val answer = 0
                     view.findViewById<TextView>(R.id.Error_textView).text = "Wrong. Try Again!"
                 }
             }
@@ -157,36 +145,36 @@ class LevelFragment() : Fragment() , LevelDialogFragment {
             )
         }
     }
-    override fun onCreateDialog() {
 
-
+     private fun onCreateDialog() {
         val builder = AlertDialog.Builder(requireContext())
         val view = LayoutInflater.from(context).inflate(R.layout.fragment_level_dialog, null)
         builder.setView(view)
-                .setTitle("Need help?")
-                .setNeutralButton("Got it") {dialog, _ -> dialog.dismiss()}
+                .setTitle("Need a hint?")
+                .setPositiveButton("Got it") { dialog, _ -> dialog.dismiss() }
 
-        val btnSolution = view.findViewById<Button>(R.id.button_solution_ad)
         val btnHint = view.findViewById<Button>(R.id.button_hint_ad)
 
-        btnSolution?.setOnClickListener{
-            showRewardedVideo()
-            Toast.makeText(context, "clicked SOLUTION", Toast.LENGTH_LONG).show()
-            btnSolution.visibility = View.INVISIBLE
-            btnHint.visibility = View.INVISIBLE
-        }
-        btnHint?.setOnClickListener{
-            showRewardedVideo()
+
+      btnHint?.setOnClickListener {
+
+            showRewardedVideo(view)
             Toast.makeText(context, "clicked HINT", Toast.LENGTH_LONG).show()
             btnHint.visibility = View.INVISIBLE
-            btnSolution.visibility = View.INVISIBLE
-        }
-         builder.show()
-    }
 
-    private fun showRewardedVideo() {
-       /* show_video_button.visibility = View.INVISIBLE*/
+
+        }
+
+        builder.show()
+
+      }
+
+    private fun showRewardedVideo(view: View) {
+        val hintText = view.findViewById<TextView>(R.id.textView_sol_hint)
+
         if (mRewardedAd != null) {
+
+
             mRewardedAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
                     Log.d(TAG, "Ad was dismissed.")
@@ -207,21 +195,21 @@ class LevelFragment() : Fragment() , LevelDialogFragment {
                     Log.d(TAG, "Ad showed fullscreen content.")
                     // Called when ad is dismissed.
                 }
+
             }
 
             mRewardedAd?.show(
-                    this.requireActivity(),
-                    OnUserEarnedRewardListener() {
-                        fun onUserEarnedReward(rewardItem: RewardItem) {
-                            var rewardAmount = rewardItem.amount
-                           /* addCoins(rewardAmount)*/
-                            Log.d("TAG", "User earned the reward.")
-                        }
-                    }
-            )
+                    this.requireActivity()
+            ) {
+                hintText?.visibility = View.VISIBLE
+                hintText?.text= hint
+                Log.d("TAG", "User earned the reward.")
+            }
         }
-    }
 
+
+    }
 }
+
 
 

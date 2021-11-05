@@ -24,12 +24,6 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 
 interface LevelDialogFragment {
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-     fun onCreateDialog() {
-    }
-
-
-
     /*   val builder = AlertDialog.Builder(requireContext())
        val view = LayoutInflater.from(context).inflate(R.layout.fragment_level_dialog, null)
        builder.setView(view)
@@ -53,10 +47,7 @@ interface LevelDialogFragment {
 
    }*/
 
-    companion object {
-        const val TAG = "HintDialog"
 
-    }
 
 
 }

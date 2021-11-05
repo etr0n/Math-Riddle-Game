@@ -16,10 +16,6 @@ class LViewModel(context: Context): ViewModel(){
 
     val database = Room.databaseBuilder(context, GameDataBase::class.java, "levels").build()
 
-  /*  init {
-        insertLevels()
-    }*/
-
     fun insertLevels(){
         viewModelScope.launch {
             database.Dao().insert(
@@ -69,9 +65,7 @@ class LViewModel(context: Context): ViewModel(){
                             0,
                             ""
                             )
-
                     )
-
             )
         }
     }
@@ -104,13 +98,11 @@ class LViewModel(context: Context): ViewModel(){
                     result.postValue(-1)
                 }
                 else  result.postValue(getId)
-
             }
             catch (e: NullPointerException){
 
                 result.postValue(-1)
             }
-
         }
         return result
     }
@@ -140,5 +132,38 @@ class LViewModel(context: Context): ViewModel(){
         }
         return result
     }
-
+    fun insertStatistic(time:Long, date: String, mistakes : Int, levelId:Int ){
+        viewModelScope.launch {
+            database.Dao().insertStatistics(
+                    Statistics(
+                        0,
+                      levelId,
+                        date,
+                        time,
+                        mistakes
+                    )
+            )
+        }
+    }
+    fun getStatistic(id:Int):LiveData<List<Statistics>> {
+        val result = MutableLiveData<List<Statistics>>()
+        viewModelScope.launch {
+           val returnedStatistics = database.Dao().getStatistics(id)
+           result.postValue(returnedStatistics)
+        }
+        return result
+    }
+    fun deleteStatistic(){
+        viewModelScope.launch {
+            database.Dao().deleteStatistics()
+        }
+    }
+    fun getAllLevels():LiveData<List<Level>>{
+        val result = MutableLiveData<List<Level>>()
+        viewModelScope.launch {
+            val returnedLevels = database.Dao().getAllLevels()
+            result.postValue(returnedLevels)
+        }
+        return result
+    }
 }

@@ -84,5 +84,20 @@
         <action
             android:id="@+id/action_statiscticsFragment_to_startFragment"
             app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_statiscticsFragment_to_statisticsSummaryFragment"
+            app:destination="@id/statisticsSummaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsSummaryFragment"
+        android:name="com.example.mathriddles.StatisticsSummaryFragment"
+        android:label="fragment_statistics_summary"
+        tools:layout="@layout/fragment_statistics_summary" >
+        <action
+            android:id="@+id/action_statisticsSummaryFragment_to_statiscticsFragment"
+            app:destination="@id/statiscticsFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 </navigation>

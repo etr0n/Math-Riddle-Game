@@ -33,4 +33,17 @@ interface Dao {
 
     @Query ("SELECT levelId From Level WHERE indicator = :indicator ORDER BY levelId DESC LIMIT 1")
     suspend fun getIdTrue(indicator: Boolean): Int
+
+    @Query("SELECT * FROM statistics WHERE levelTimeId = :id ")
+    suspend fun getStatistics(id: Int): List<Statistics>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertStatistics( statistics: Statistics)
+
+    @Query("DELETE FROM Statistics")
+    suspend fun deleteStatistics()
+
+    @Query("SELECT * FROM Level")
+    suspend fun getAllLevels():List<Level>
+
 }

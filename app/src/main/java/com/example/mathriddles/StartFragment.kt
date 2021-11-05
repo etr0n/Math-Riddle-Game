@@ -16,7 +16,6 @@ import androidx.navigation.findNavController
 
 class StartFragment : Fragment() {
 
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -57,12 +56,10 @@ class StartFragment : Fragment() {
 
         view.findViewById<Button>(R.id.restart_btn).setOnClickListener{
             viewModel.insertLevels()
+            viewModel.deleteStatistic()
             Toast.makeText(activity, "Game restarted", Toast.LENGTH_LONG).show()
         }
-
         return view
     }
-
-
 
 }

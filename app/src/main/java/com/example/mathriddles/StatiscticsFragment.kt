@@ -12,11 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import org.w3c.dom.Text
+
 
 
 class StatiscticsFragment : Fragment() {
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -29,8 +28,6 @@ class StatiscticsFragment : Fragment() {
         }
         val recycler = view.findViewById(R.id.recyclerView) as RecyclerView
 
-
-
         viewModel.getAllLevel().observe(viewLifecycleOwner, Observer { returnedLevel ->
 
             if(returnedLevel.isNotEmpty())
@@ -38,17 +35,16 @@ class StatiscticsFragment : Fragment() {
                 view.findViewById<TextView>(R.id.lvl_textView).text = "LVL"
                 view.findViewById<TextView>(R.id.datetimestats_textView).text = "Date & time"
                 view.findViewById<TextView>(R.id.bestscore_textView).text = "Best score"
-                recycler.adapter = LAdapter(returnedLevel)
+
+                val adapter = LAdapter(returnedLevel, onClick = {it -> view.findNavController().navigate(StatiscticsFragmentDirections
+                        .actionStatiscticsFragmentToStatisticsSummaryFragment(it))} )
+                recycler.adapter = adapter
 
             }
             else view.findViewById<TextView>(R.id.noData_textView).text = "No data found"
 
         })
-        recycler.adapter?.notifyDataSetChanged()
-
         return view
     }
-
-
 
 }

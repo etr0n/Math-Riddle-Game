@@ -39,12 +39,11 @@ class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
 
     ): View? {
 
+        val viewModel: LViewModel by viewModels { ViewModelFactory(requireContext()) }
+
         val view = inflater.inflate(R.layout.fragment_level, container, false)
         val args = LevelFragmentArgs.fromBundle(requireArguments())
         MobileAds.initialize(requireContext()) {}
-
-
-        val viewModel: LViewModel by viewModels { ViewModelFactory(requireContext()) }
 
         viewModel.getlevel(args.Id).observe(viewLifecycleOwner, Observer { returnedLevel ->
             val image: ImageView = view.findViewById(R.id.riddle_imageView)

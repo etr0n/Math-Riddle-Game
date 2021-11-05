@@ -22,7 +22,6 @@ class SAdapter(val statistics: List<Statistics>):
         )
     }
     override fun getItemCount(): Int{
-
         return statistics.size
     }
 
@@ -32,13 +31,11 @@ class SAdapter(val statistics: List<Statistics>):
         holder.dateText.text = data.date
         holder.timeText.text = time
         holder.mistakesText.text = data.mistakes.toString()
-
     }
     private fun convertLongToTime(time: Long): String {
         val date = Date(time)
         val format = SimpleDateFormat("mm:ss")
         return format.format(date)
     }
-
 
 }

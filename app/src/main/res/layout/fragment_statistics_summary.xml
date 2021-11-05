@@ -33,10 +33,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewStatSummary"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="391dp"
+        android:layout_height="179dp"
+        android:layout_marginBottom="70dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/lineChart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timestat_textView" />
@@ -45,10 +46,10 @@
         android:id="@+id/datestat_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="24dp"
         android:text="Date"
-        android:textColor="#FFFFFF"
+        android:textColor="#845fb3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statisctics_textView" />
 
@@ -56,10 +57,11 @@
         android:id="@+id/timestat_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
+        android:layout_marginStart="130dp"
         android:layout_marginTop="24dp"
         android:text="Time"
-        android:textColor="#FFFFFF"
+        android:textColor="#845fb3"
+        app:layout_constraintEnd_toStartOf="@+id/mistakestat_textView"
         app:layout_constraintStart_toEndOf="@+id/datestat_textView"
         app:layout_constraintTop_toBottomOf="@+id/statisctics_textView" />
 
@@ -67,11 +69,25 @@
         android:id="@+id/mistakestat_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="35dp"
         android:text="Mistakes"
-        android:textColor="#FFFFFF"
+        android:textColor="#845fb3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/timestat_textView"
         app:layout_constraintTop_toBottomOf="@+id/statisctics_textView" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="0dp"
+        android:layout_height="310dp"
+        android:layout_marginTop="24dp"
+        android:background="#FFFFFF"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewStatSummary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

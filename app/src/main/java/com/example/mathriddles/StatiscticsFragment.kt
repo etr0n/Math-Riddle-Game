@@ -12,26 +12,21 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import com.example.mathriddles.databinding.FragmentLevelBinding
-import com.example.mathriddles.databinding.FragmentStatiscticsBinding
+
 
 
 class StatiscticsFragment : Fragment() {
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_statisctics, container, false)
         val viewModel: LViewModel by viewModels { ViewModelFactory(requireContext()) }
 
-
-
         view.findViewById<ImageButton>(R.id.statiscticsBack_btn).setOnClickListener{
             val action = StatiscticsFragmentDirections.actionStatiscticsFragmentToStartFragment()
             view.findNavController().navigate(action)
         }
         val recycler = view.findViewById(R.id.recyclerView) as RecyclerView
-
 
         viewModel.getAllLevel().observe(viewLifecycleOwner, Observer { returnedLevel ->
 
@@ -45,16 +40,11 @@ class StatiscticsFragment : Fragment() {
                         .actionStatiscticsFragmentToStatisticsSummaryFragment(it))} )
                 recycler.adapter = adapter
 
-
             }
             else view.findViewById<TextView>(R.id.noData_textView).text = "No data found"
 
         })
-       // recycler.adapter?.notifyDataSetChanged()
-
         return view
     }
-
-
 
 }

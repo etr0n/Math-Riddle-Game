@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
@@ -18,7 +17,7 @@ class LAdapter(val levels: List<Level>, private val onClick:((levelId:Int)->Unit
         val levelText = view.findViewById(R.id.levelItem_TextView) as TextView
         val dateText = view.findViewById(R.id.dateItem_textView) as TextView
         val bestTimeText = view.findViewById(R.id.bestTimeItem_textView) as TextView
-        val button = view.findViewById<ImageButton>(R.id.stat_button)!!
+        val button = view.findViewById<Button>(R.id.stat_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,6 +39,7 @@ class LAdapter(val levels: List<Level>, private val onClick:((levelId:Int)->Unit
            when(position){
                 data.levelId-1 -> {
                     onClick?.invoke(data.levelId)
+
                 }
                 else -> return@setOnClickListener
            }

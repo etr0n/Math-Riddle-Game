@@ -20,11 +20,9 @@
             android:text="Levels"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/lvl2_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/LevelBack_btn"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/LevelBack_btn"
@@ -39,58 +37,20 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/abc_vector_test" />
 
-        <Button
-            android:id="@+id/lvl1_btn"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewAllLevel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="37dp"
-            android:layout_marginTop="61dp"
-            android:layout_marginEnd="29dp"
-            android:enabled="false"
-            android:text="1"
-            app:layout_constraintEnd_toStartOf="@+id/lvl2_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/LevelBack_btn"
-            app:backgroundTint="#845fb3"/>
-
-        <Button
-            android:id="@+id/lvl2_btn"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
-            android:layout_marginTop="61dp"
-            android:layout_marginEnd="29dp"
-            android:enabled="false"
-            android:text="2"
-            app:layout_constraintEnd_toStartOf="@+id/lvl3_btn"
-            app:layout_constraintStart_toEndOf="@+id/lvl1_btn"
-            app:layout_constraintTop_toBottomOf="@+id/LevelBack_btn"
-            app:backgroundTint="#845fb3"/>
-
-        <Button
-            android:id="@+id/lvl3_btn"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
-            android:layout_marginTop="61dp"
-            android:layout_marginEnd="29dp"
-            android:enabled="false"
-            android:text="3"
-            app:layout_constraintEnd_toStartOf="@+id/lvl4_btn"
-            app:layout_constraintStart_toEndOf="@+id/lvl2_btn"
-            app:layout_constraintTop_toBottomOf="@+id/LevelBack_btn"
-            app:backgroundTint="#845fb3"/>
-
-        <Button
-            android:id="@+id/lvl4_btn"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
-            android:layout_marginTop="61dp"
+            android:layout_marginTop="64dp"
             android:layout_marginEnd="37dp"
-            android:enabled="false"
-            android:text="4"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/lvl3_btn"
-            app:layout_constraintTop_toBottomOf="@+id/LevelBack_btn"
-            app:backgroundTint="#845fb3"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Level_textView"
+            app:spanCount="4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -15,15 +15,11 @@ import java.util.*
 
 
 class SummaryFragment : Fragment() {
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_summary, container, false)
         val args = SummaryFragmentArgs.fromBundle(requireArguments())
-
-
 
         if(args.balas > 0){
             view.findViewById<TextView>(R.id.textView4_balas).text = "Your mark: " + args.balas.toString()+ " / 10"
@@ -31,10 +27,7 @@ class SummaryFragment : Fragment() {
         else
             view.findViewById<TextView>(R.id.textView4_balas).text = "Very very bad..."
 
-
         view.findViewById<TextView>(R.id.timer_textView).text = convertLongToTime(args.timer)
-
-
         view.findViewById<Button>(R.id.nextlvl_btn).setOnClickListener{
 
             val viewModel: LViewModel by viewModels{ViewModelFactory(requireContext())}
@@ -49,10 +42,7 @@ class SummaryFragment : Fragment() {
                     val action = SummaryFragmentDirections.actionSummaryFragmentToEndGameFragment()
                     view.findNavController().navigate(action)
                 }
-
-
             })
-
 
         }
         return view
@@ -62,5 +52,4 @@ class SummaryFragment : Fragment() {
         val format = SimpleDateFormat("mm:ss")
         return format.format(date)
     }
-
 }

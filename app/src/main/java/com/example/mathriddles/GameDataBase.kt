@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = arrayOf(Level::class,Statistics::class), version = 2)
-/*@TypeConverters(LevelConverter::class)*/
 abstract class GameDataBase : RoomDatabase() {
     abstract fun Dao(): Dao
 
@@ -19,7 +18,6 @@ abstract class GameDataBase : RoomDatabase() {
                     context.applicationContext,
                     GameDataBase::class.java,
                     "game-db"
-
                 ).build()
                 _instance = instance
                 instance

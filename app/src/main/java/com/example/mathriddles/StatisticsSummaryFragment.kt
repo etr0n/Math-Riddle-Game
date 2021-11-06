@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
@@ -22,6 +23,7 @@ import com.github.mikephil.charting.formatter.ColorFormatter
 import com.github.mikephil.charting.formatter.DefaultValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import org.w3c.dom.Text
 import java.text.DecimalFormat
 
 
@@ -49,6 +51,7 @@ class StatisticsSummaryFragment : Fragment() {
 
             recycler.adapter = SAdapter(returnedStatistics)
 
+            view.findViewById<TextView>(R.id.TextView_level_summary).text = args.id.toString()
             lineChart = view.findViewById(R.id.lineChart)
             initLineChart()
             setDataToLineChart(returnedStatistics)

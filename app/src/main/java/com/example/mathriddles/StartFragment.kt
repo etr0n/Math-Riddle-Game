@@ -26,7 +26,7 @@ class StartFragment : Fragment() {
 
         viewModel.getCount().observe(viewLifecycleOwner, Observer {
             if (it == 0){
-            viewModel.insertLevels()
+            viewModel.createLevelSequence()
         }
         })
 
@@ -55,7 +55,7 @@ class StartFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.restart_btn).setOnClickListener{
-            viewModel.insertLevels()
+            viewModel.deleteLevel()
             viewModel.deleteStatistic()
             Toast.makeText(activity, "Game restarted", Toast.LENGTH_LONG).show()
         }

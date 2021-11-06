@@ -11,7 +11,7 @@ import androidx.room.Relation
      @PrimaryKey(autoGenerate = true) val levelId: Int,
      val hint: String,
      val answer: Int,
-     @DrawableRes val image: Int,
+     val sequence: String,
      val indicator : Boolean,
      val bestTime : Long,
      val date : String

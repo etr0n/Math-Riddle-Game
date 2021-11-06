@@ -8,13 +8,13 @@ import java.util.concurrent.Flow
 interface Dao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert( level: List<Level>)
+    suspend fun insert( level: Level)
 
     @Query ("SELECT * FROM Level WHERE levelId = :id")
     suspend fun getlevel (id: Int): Level
 
-    @Query ("SELECT image From Level WHERE levelId= :id")
-    suspend fun getImage(id: Int): Int
+    @Query("DELETE FROM Level")
+    suspend fun deleteLevels()
 
     @Query("SELECT COUNT(*) From Level ")
     suspend fun getCount(): Int
@@ -43,7 +43,7 @@ interface Dao {
     @Query("DELETE FROM Statistics")
     suspend fun deleteStatistics()
 
-    @Query("SELECT * FROM Level")
+    @Query("SELECT * FROM Level LIMIT 7")
     suspend fun getAllLevels():List<Level>
 
 }

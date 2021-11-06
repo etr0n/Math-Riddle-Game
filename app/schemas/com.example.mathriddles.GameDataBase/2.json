@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "e766c47bddddd3f658a65e80f432192d",
+    "identityHash": "dc68eb5da9f8812193ee65ad369dd4e0",
     "entities": [
       {
         "tableName": "Level",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`levelId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `hint` TEXT NOT NULL, `answer` INTEGER NOT NULL, `image` INTEGER NOT NULL, `indicator` INTEGER NOT NULL, `bestTime` INTEGER NOT NULL, `date` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`levelId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `hint` TEXT NOT NULL, `answer` INTEGER NOT NULL, `sequence` TEXT NOT NULL, `indicator` INTEGER NOT NULL, `bestTime` INTEGER NOT NULL, `date` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "levelId",
@@ -27,9 +27,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "image",
-            "columnName": "image",
-            "affinity": "INTEGER",
+            "fieldPath": "sequence",
+            "columnName": "sequence",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -108,7 +108,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e766c47bddddd3f658a65e80f432192d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dc68eb5da9f8812193ee65ad369dd4e0')"
     ]
   }
 }

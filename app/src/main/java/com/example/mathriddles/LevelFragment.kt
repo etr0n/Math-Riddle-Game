@@ -43,19 +43,16 @@ class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
         val view = inflater.inflate(R.layout.fragment_level, container, false)
         val args = LevelFragmentArgs.fromBundle(requireArguments())
         MobileAds.initialize(requireContext()) {}
+        view.findViewById<TextView>(R.id.number_textView).text = args.Id.toString()
 
         viewModel.getlevel(args.Id).observe(viewLifecycleOwner, Observer { returnedLevel ->
-            val image: ImageView = view.findViewById(R.id.riddle_imageView)
-            image.setImageResource(returnedLevel.image)
+            view.findViewById<TextView>(R.id.textView_sequence).text = returnedLevel.sequence
             loadRewardedAd()
 
             view.findViewById<ImageButton>(R.id.hint_btn).setOnClickListener {
                 hint = returnedLevel.hint
-              /*  showRewardedVideo()*/
                 onCreateDialog()
             }
-            view.findViewById<TextView>(R.id.number_textView).text = args.Id.toString()
-
 
             val meter = view.findViewById<Chronometer>(R.id.c_meter)
             meter.start()
@@ -77,11 +74,11 @@ class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
                         } else best = m
 
 
-                        val action = LevelFragmentDirections.actionLevelFragmentToSummaryFragment(m, balas)
+                        val action = LevelFragmentDirections.actionLevelFragmentToSummaryFragment(m, balas, args.Id)
                         view.findNavController().navigate(action)
 
                         viewModel.updateIndicator(args.Id, best, dateInString)
-                        viewModel.insertStatistic(m,dateInString,klaidu_kiekis,returnedLevel.levelId)
+                        viewModel.insertStatistic(m, dateInString, klaidu_kiekis, returnedLevel.levelId)
 
                     } else {
                         view.findViewById<TextView>(R.id.Error_textView).text = "Wrong. Try Again!"
@@ -149,18 +146,12 @@ class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
 
         val btnHint = view.findViewById<Button>(R.id.button_hint_ad)
 
-
       btnHint?.setOnClickListener {
-
             showRewardedVideo(view)
-            Toast.makeText(context, "clicked HINT", Toast.LENGTH_LONG).show()
+           /* Toast.makeText(context, "clicked HINT", Toast.LENGTH_LONG).show()*/
             btnHint.visibility = View.INVISIBLE
-
-
         }
-
         builder.show()
-
       }
 
     private fun showRewardedVideo(view: View) {

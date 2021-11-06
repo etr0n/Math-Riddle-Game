@@ -1,6 +1,7 @@
 package com.example.mathriddles
 
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,60 +16,6 @@ import java.security.KeyStore
 class LViewModel(context: Context): ViewModel(){
 
     val database = Room.databaseBuilder(context, GameDataBase::class.java, "levels").build()
-
-    fun insertLevels(){
-        viewModelScope.launch {
-            database.Dao().insert(
-                    listOf<Level>(
-                            Level(
-                                    1,
-                                    "+3",
-                                    12,
-                                    R.drawable.lvl1,
-                                    true,
-                                    0,
-                                ""
-                            )  ,
-                            Level(
-                                    2,
-                                    "x4",
-                                    20,
-                                    R.drawable.lvl2,
-                                    false,
-                                    0,
-                                ""
-                            ),
-                            Level(
-                                    3,
-                                    "-",
-                                    4,
-                                    R.drawable.lvl3,
-                                    false,
-                                    0,
-                                ""
-                            ),
-                            Level(
-                                    4,
-                                    "ABC",
-                                    301,
-                                    R.drawable.lvl4,
-                                    false,
-                                    0,
-                                    ""
-                            ),
-                            Level(
-                            5,
-                            "21",
-                            21,
-                            R.drawable.lvl5,
-                            false,
-                            0,
-                            ""
-                            )
-                    )
-            )
-        }
-    }
 
     fun updateIndicator(id: Int, bestTime:Long, date:String){
         viewModelScope.launch {
@@ -98,6 +45,21 @@ class LViewModel(context: Context): ViewModel(){
                     result.postValue(-1)
                 }
                 else  result.postValue(getId)
+            }
+            catch (e: NullPointerException){
+
+                result.postValue(-1)
+            }
+        }
+        return result
+    }
+    fun gameSummaryId():LiveData<Int>{
+        var result = MutableLiveData<Int>()
+
+        viewModelScope.launch {
+            try {
+                val getCount = database.Dao().getCount()
+                result.postValue(getCount)
             }
             catch (e: NullPointerException){
 
@@ -166,4 +128,53 @@ class LViewModel(context: Context): ViewModel(){
         }
         return result
     }
+
+    fun createLevelSequence() {
+
+        for (i in 1..8){
+            val rnd = (i+3..i*100).random()
+            val numbersequence = generateSequence(rnd) { it + 3 }
+            val numseqList= numbersequence.take(4).toList()
+
+            if(i == 1) {
+                viewModelScope.launch {
+                    database.Dao().insert(
+                            Level(
+                                    i,
+                                    "+",
+                                    numseqList[3],
+                                    numseqList.joinToString(separator = ", ", limit = 3, truncated = " ?"),
+                                    true,
+                                    0,
+                                    ""
+                            )
+                    )
+                }
+
+            }
+            else
+            {
+                viewModelScope.launch {
+                    database.Dao().insert(
+                            Level(
+                                    i,
+                                    "+",
+                                    numseqList[3],
+                                    numseqList.joinToString(separator = ", ", limit = 3, truncated = " ?"),
+                                    false,
+                                    0,
+                                    ""
+                            )
+                    )
+                }
+            }
+
+        }
+    }
+    fun deleteLevel(){
+        viewModelScope.launch {
+            database.Dao().deleteLevels()
+        }
+    }
+
 }

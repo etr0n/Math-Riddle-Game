@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.lifecycle.Observer
@@ -30,16 +31,19 @@ class SummaryFragment : Fragment() {
         view.findViewById<TextView>(R.id.timer_textView).text = convertLongToTime(args.timer)
         view.findViewById<Button>(R.id.nextlvl_btn).setOnClickListener{
 
+
+
             val viewModel: LViewModel by viewModels{ViewModelFactory(requireContext())}
 
-            viewModel.gameStartId().observe(viewLifecycleOwner, Observer {
+            viewModel.gameSummaryId().observe(viewLifecycleOwner, Observer {
 
-                if (it != -1){
-                    val action = SummaryFragmentDirections.actionSummaryFragmentToLevelFragment(it)
+                if(it-1 == args.Id)
+                {
+                    val action = SummaryFragmentDirections.actionSummaryFragmentToEndGameFragment()
                     view.findNavController().navigate(action)
                 }
                 else {
-                    val action = SummaryFragmentDirections.actionSummaryFragmentToEndGameFragment()
+                    val action = SummaryFragmentDirections.actionSummaryFragmentToLevelFragment(args.Id+1)
                     view.findNavController().navigate(action)
                 }
             })

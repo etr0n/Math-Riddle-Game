@@ -24,30 +24,5 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 
 interface LevelDialogFragment {
 
-    /*   val builder = AlertDialog.Builder(requireContext())
-       val view = LayoutInflater.from(context).inflate(R.layout.fragment_level_dialog, null)
-       builder.setView(view)
-           .setTitle("Need help?")
-           .setNeutralButton("Got it") {dialog, _ -> dialog.dismiss()}
-
-       val btnSolution = view.findViewById<Button>(R.id.button_solution_ad)
-       val btnHint = view.findViewById<Button>(R.id.button_hint_ad)
-
-       btnSolution?.setOnClickListener{
-           Toast.makeText(context, "clicked SOLUTION", Toast.LENGTH_LONG).show()
-           btnSolution.visibility = View.INVISIBLE
-           btnHint.visibility = View.INVISIBLE
-       }
-       btnHint?.setOnClickListener{
-           Toast.makeText(context, "clicked HINT", Toast.LENGTH_LONG).show()
-           btnHint.visibility = View.INVISIBLE
-           btnSolution.visibility = View.INVISIBLE
-       }
-       return builder.create()
-
-   }*/
-
-
-
 
 }

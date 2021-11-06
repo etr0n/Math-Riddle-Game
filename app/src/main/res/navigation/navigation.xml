@@ -66,6 +66,9 @@
         <argument
             android:name="balas"
             app:argType="integer" />
+        <argument
+            android:name="Id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/endGameFragment"

@@ -16,8 +16,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 
 
-
 class StartFragment : Fragment() {
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,

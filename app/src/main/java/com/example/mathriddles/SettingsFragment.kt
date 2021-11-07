@@ -2,11 +2,13 @@ package com.example.mathriddles
 
 import android.annotation.SuppressLint
 import android.media.AudioManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +17,7 @@ import androidx.navigation.findNavController
 
 class SettingsFragment : Fragment() {
 
+    @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +36,7 @@ class SettingsFragment : Fragment() {
         view.findViewById<Button>(R.id.restart_btn).setOnClickListener{
             viewModel.deleteLevel()
             viewModel.deleteStatistic()
+            viewModel.createLevelSequence()
             Toast.makeText(activity, "restarted", Toast.LENGTH_LONG).show()
         }
 

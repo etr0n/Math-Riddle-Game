@@ -46,4 +46,6 @@ interface Dao {
     @Query("SELECT * FROM Level LIMIT 7")
     suspend fun getAllLevels():List<Level>
 
+    @Query ("SELECT COUNT(*) From Level WHERE indicator = :indicator")
+    suspend fun getProgress(indicator: Boolean): Int
 }

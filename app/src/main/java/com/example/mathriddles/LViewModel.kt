@@ -177,4 +177,22 @@ class LViewModel(context: Context): ViewModel(){
         }
     }
 
+    fun getProgress():LiveData<Int>{
+        var result = MutableLiveData<Int>()
+
+
+        viewModelScope.launch {
+            try {
+                val count = database.Dao().getProgress(true)
+                result.postValue(count)
+            }
+            catch (e: NullPointerException){
+
+                result.postValue(-1)
+            }
+
+        }
+        return result
+    }
+
 }

@@ -19,15 +19,15 @@
             android:id="@+id/play_btn"
             android:layout_width="170dp"
             android:layout_height="55dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="15dp"
             android:text="Play"
             app:backgroundTint="#845fb3"
             app:icon="@android:drawable/ic_media_play"
             app:layout_constraintBottom_toTopOf="@+id/AllLevels_btn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/MathRiddles_TextView" />
+            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
         <Button
             android:id="@+id/AllLevels_btn"
@@ -39,7 +39,7 @@
             app:icon="@android:drawable/ic_dialog_dialer"
             app:layout_constraintBottom_toTopOf="@+id/stat_btn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/play_btn" />
 
@@ -51,24 +51,23 @@
             android:text="Statistics"
             app:backgroundTint="#845fb3"
             app:icon="?android:attr/actionModeFindDrawable"
-            app:layout_constraintBottom_toTopOf="@+id/restart_btn"
+            app:layout_constraintBottom_toTopOf="@+id/settings_btn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/AllLevels_btn" />
 
         <Button
-            android:id="@+id/restart_btn"
+            android:id="@+id/settings_btn"
             android:layout_width="170dp"
             android:layout_height="55dp"
             android:layout_marginTop="25dp"
-            android:layout_marginBottom="180dp"
-            android:text="Restart"
+            android:text="Settings"
             app:backgroundTint="#845fb3"
-            app:icon="@android:drawable/stat_notify_sync"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:icon="@android:drawable/ic_menu_preferences"
+            app:layout_constraintBottom_toTopOf="@+id/restart_btn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stat_btn" />
 
@@ -77,17 +76,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="164dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="164dp"
             android:fontFamily="sans-serif-medium"
             android:text="Math Riddles"
             android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/play_btn"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toTopOf="@+id/progress_textView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="196dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/greyish"
+            android:progressBackgroundTint="#845fb3"
+            android:progressTint="#845fb3"
+            app:layout_constraintBottom_toTopOf="@+id/play_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_textView" />
+
+        <TextView
+            android:id="@+id/progress_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="171dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="182dp"
+            android:text="TextView"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/progressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MathRiddles_TextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

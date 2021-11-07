@@ -1,5 +1,6 @@
 package com.example.mathriddles
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -54,11 +57,31 @@ class StartFragment : Fragment() {
             view.findNavController().navigate(action)
         }
 
-        view.findViewById<Button>(R.id.restart_btn).setOnClickListener{
+
+        view.findViewById<Button>(R.id.settings_btn).setOnClickListener{
+            val action = StartFragmentDirections.actionStartFragmentToSettingsFragment()
+            view.findNavController().navigate(action)
+        }
+
+        viewModel.getCount().observe(viewLifecycleOwner, Observer {
+            val prg = view.findViewById<ProgressBar>(R.id.progressBar)
+            prg.max = it - 1
+
+            viewModel.getProgress().observe(viewLifecycleOwner, Observer {
+                val currentProgress = it - 1
+                view.findViewById<TextView>(R.id.progress_textView).text =
+                    "Done " + currentProgress + " of " + prg.max + " levels"
+
+                ObjectAnimator.ofInt(prg, "Progress", currentProgress)
+                    .setDuration(0)
+                    .start()
+            })
+        })
+        /*view.findViewById<Button>(R.id.restart_btn).setOnClickListener{
             viewModel.deleteLevel()
             viewModel.deleteStatistic()
             Toast.makeText(activity, "Game restarted", Toast.LENGTH_LONG).show()
-        }
+        }*/
         return view
     }
 

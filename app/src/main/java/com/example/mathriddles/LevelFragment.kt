@@ -1,6 +1,7 @@
 package com.example.mathriddles
 
 import android.app.AlertDialog
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
@@ -58,11 +59,15 @@ class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
             meter.start()
             var balas = 10;
             var klaidu_kiekis = 0;
+            var mediaPlayer1 = MediaPlayer.create(context, R.raw.success1)
+            var mediaPlayer2 = MediaPlayer.create(context, R.raw.error_buzzer)
+
             view.findViewById<Button>(R.id.submit_btn).setOnClickListener {
                 try {
                     val answer: Int = view.findViewById<EditText>(R.id.answer_textField).text.toString().toInt()
 
                     if (answer == returnedLevel.answer) {
+                        mediaPlayer1.start()
                         meter.stop()
                         val m = SystemClock.elapsedRealtime() - meter.base;
                         ///
@@ -81,6 +86,8 @@ class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
                         viewModel.insertStatistic(m, dateInString, klaidu_kiekis, returnedLevel.levelId)
 
                     } else {
+
+                        mediaPlayer2.start()
                         view.findViewById<TextView>(R.id.Error_textView).text = "Wrong. Try Again!"
                         klaidu_kiekis += 1
                         view.findViewById<TextView>(R.id.textView4_kiekis).text = "Errors made " + klaidu_kiekis.toString()
@@ -90,6 +97,7 @@ class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
                         }
                     }
                 } catch (e: NumberFormatException) {
+                    mediaPlayer2.start()
                     val answer = 0
                     view.findViewById<TextView>(R.id.Error_textView).text = "Wrong. Try Again!"
                 }

@@ -77,11 +77,7 @@ class StartFragment : Fragment() {
                     .start()
             })
         })
-        /*view.findViewById<Button>(R.id.restart_btn).setOnClickListener{
-            viewModel.deleteLevel()
-            viewModel.deleteStatistic()
-            Toast.makeText(activity, "Game restarted", Toast.LENGTH_LONG).show()
-        }*/
+
         return view
     }
 

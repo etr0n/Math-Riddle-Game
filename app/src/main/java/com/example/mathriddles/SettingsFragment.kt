@@ -39,6 +39,10 @@ class SettingsFragment : Fragment() {
             viewModel.createLevelSequence()
             Toast.makeText(activity, "restarted", Toast.LENGTH_LONG).show()
         }
+        view.findViewById<Button>(R.id.settings_btn_editProfile).setOnClickListener{
+            val action = SettingsFragmentDirections.actionSettingsFragmentToEditProfile()
+            view.findNavController().navigate(action)
+        }
 
         val audioManager = requireContext().getSystemService(AudioManager::class.java)
         val sw1 = view.findViewById<Switch>(R.id.switch_sound)

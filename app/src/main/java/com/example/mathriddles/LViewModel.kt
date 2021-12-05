@@ -121,21 +121,21 @@ class LViewModel(context: Context): ViewModel(){
         }
     }
     fun getAllLevels():LiveData<List<Level>>{
+
         val result = MutableLiveData<List<Level>>()
         viewModelScope.launch {
-            val returnedLevels = database.Dao().getAllLevels()
+            val count = database.Dao().getCount()
+            val returnedLevels = database.Dao().getAllLevels(count-1)
             result.postValue(returnedLevels)
         }
         return result
     }
 
     fun createLevelSequence() {
-
-        for (i in 1..8){
-            val rnd = (i+3..i*100).random()
+        for (i in 1..21 step 3){
+            val rnd = (i+3..i+100).random()
             val numbersequence = generateSequence(rnd) { it + 3 }
             val numseqList= numbersequence.take(4).toList()
-
             if(i == 1) {
                 viewModelScope.launch {
                     database.Dao().insert(
@@ -150,7 +150,6 @@ class LViewModel(context: Context): ViewModel(){
                             )
                     )
                 }
-
             }
             else
             {
@@ -170,7 +169,46 @@ class LViewModel(context: Context): ViewModel(){
             }
 
         }
+        for(i in 2..21 step 3 ){
+            val rnd = (10..20).random()
+            val rnd1 =(1..9).random()
+            val ans = rnd*rnd1
+            viewModelScope.launch {
+                database.Dao().insert(
+                        Level(
+                                i,
+                                "*",
+                                ans,
+                                "$rnd,$rnd1",
+                                false,
+                                0,
+                                ""
+                        )
+                )
+            }
+
+        }
+        for(i in 3..21 step 3 ){
+            val rnd = (i+1..30).random()
+            val numbersequence = generateSequence(rnd) { it * 2 }
+            val numseqList= numbersequence.take(4).toList()
+
+            viewModelScope.launch {
+                database.Dao().insert(
+                    Level(
+                        i,
+                        "+",
+                        numseqList[3],
+                        numseqList.joinToString(separator = ", ", limit = 3, truncated = " ?"),
+                        false,
+                        0,
+                        ""
+                    )
+                )
+            }
+        }
     }
+
     fun deleteLevel(){
         viewModelScope.launch {
             database.Dao().deleteLevels()

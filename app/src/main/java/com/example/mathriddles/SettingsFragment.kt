@@ -1,6 +1,7 @@
 package com.example.mathriddles
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -27,6 +29,14 @@ class SettingsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         val viewModel: LViewModel by viewModels{ViewModelFactory(requireContext())}
 
+        view.findViewById<Button>(R.id.button_switch_theme).setOnClickListener {
+            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                Configuration.UI_MODE_NIGHT_YES ->
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                Configuration.UI_MODE_NIGHT_NO ->
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        }
 
         view.findViewById<ImageButton>(R.id.settingsBack_btn).setOnClickListener{
             val action = SettingsFragmentDirections.actionSettingsFragmentToStartFragment()
@@ -38,10 +48,6 @@ class SettingsFragment : Fragment() {
             viewModel.deleteStatistic()
             viewModel.createLevelSequence()
             Toast.makeText(activity, "restarted", Toast.LENGTH_LONG).show()
-        }
-        view.findViewById<Button>(R.id.settings_btn_editProfile).setOnClickListener{
-            val action = SettingsFragmentDirections.actionSettingsFragmentToEditProfile()
-            view.findNavController().navigate(action)
         }
 
         val audioManager = requireContext().getSystemService(AudioManager::class.java)

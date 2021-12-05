@@ -70,6 +70,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch_sound" />
 
+    <Button
+        android:id="@+id/button_switch_theme"
+        android:layout_width="140dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="72dp"
+        android:text="Switch"
+        app:backgroundTint="#845fb3"
+        app:icon="@android:drawable/stat_notify_sync"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restart_btn" />
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -86,25 +98,13 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="24dp"
-        android:text="Profile"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="30dp"
+        android:text="Theme"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <Button
-        android:id="@+id/settings_btn_editProfile"
-        android:layout_width="140dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="75dp"
-        android:text="Edit"
-        app:backgroundTint="#845fb3"
-        app:icon="@android:drawable/ic_menu_edit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restart_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

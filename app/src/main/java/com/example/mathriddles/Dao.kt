@@ -43,8 +43,9 @@ interface Dao {
     @Query("DELETE FROM Statistics")
     suspend fun deleteStatistics()
 
-    @Query("SELECT * FROM Level LIMIT 7")
-    suspend fun getAllLevels():List<Level>
+    @Query("SELECT * FROM Level LIMIT :size")
+    //@Query("SELECT *, COUNT(*) AS size FROM level LIMIT size ")
+    suspend fun getAllLevels(size:Int):List<Level>
 
     @Query ("SELECT COUNT(*) From Level WHERE indicator = :indicator")
     suspend fun getProgress(indicator: Boolean): Int

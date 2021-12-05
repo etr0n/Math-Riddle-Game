@@ -158,18 +158,20 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4_kiekis"
             app:layout_constraintVertical_bias="0.213" />
 
-        <View
-            android:id="@+id/view_draw"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="260dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <ImageView
+            android:id="@+id/level_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="138dp"
+            android:layout_marginTop="132dp"
+            android:layout_marginEnd="165dp"
+            android:layout_marginBottom="172dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/answer_textField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4_kiekis"/>
+        
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,6 +1,11 @@
 package com.example.mathriddles
 
 import android.app.AlertDialog
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.drawable.BitmapDrawable
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -22,6 +27,7 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 
 class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
@@ -46,15 +52,47 @@ class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
         MobileAds.initialize(requireContext()) {}
         view.findViewById<TextView>(R.id.number_textView).text = args.Id.toString()
 
-        viewModel.getlevel(args.Id).observe(viewLifecycleOwner, Observer { returnedLevel ->
-            view.findViewById<TextView>(R.id.textView_sequence).text = returnedLevel.sequence
-            loadRewardedAd()
+        val bitmap: Bitmap = Bitmap.createBitmap(700, 1000, Bitmap.Config.ARGB_8888)
+        val canvas: Canvas = Canvas(bitmap)
 
+        viewModel.getlevel(args.Id).observe(viewLifecycleOwner, Observer { returnedLevel ->
             view.findViewById<ImageButton>(R.id.hint_btn).setOnClickListener {
                 hint = returnedLevel.hint
                 onCreateDialog()
-            }
 
+            }
+            val list = returnedLevel.sequence.split(",")
+            if (list.size == 2)
+           {
+                view.findViewById<ImageView>(R.id.level_imageView).visibility = View.VISIBLE
+                val x= list[0]
+                val y = list[1]
+                var left = 100
+                var top = 300
+                var right = 700
+                var bottom = 700
+                var paint = Paint()
+                paint.color = Color.WHITE
+                paint.style = Paint.Style.FILL
+                paint.strokeWidth = 10f
+                canvas.drawRect(left.toFloat(),top.toFloat(),right.toFloat(),bottom.toFloat(),paint)
+                paint.textSize = 100f
+                canvas.drawText(x,350f,250f,paint)
+                canvas.drawText(y, 20f, 550f,paint)
+
+           }
+            else{
+                view.findViewById<ImageView>(R.id.level_imageView).visibility = View.VISIBLE
+                var textPaint = Paint()
+                textPaint.color = Color.WHITE
+                textPaint.style = Paint.Style.FILL
+                textPaint.textSize = 100f
+                textPaint.textAlign = Paint.Align.CENTER
+                canvas.drawText(returnedLevel.sequence,canvas.width/2f,550f,textPaint)
+
+            }
+            view.findViewById<ImageView>(R.id.level_imageView).background = BitmapDrawable(resources, bitmap)
+            loadRewardedAd()
             val meter = view.findViewById<Chronometer>(R.id.c_meter)
             meter.start()
             var balas = 10;
@@ -78,7 +116,6 @@ class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
                             best = returnedLevel.bestTime
                         } else best = m
 
-
                         val action = LevelFragmentDirections.actionLevelFragmentToSummaryFragment(m, balas, args.Id)
                         view.findNavController().navigate(action)
 
@@ -93,12 +130,10 @@ class LevelFragment() : Fragment() /*,LevelDialogFragment*/ {
                         view.findViewById<TextView>(R.id.textView4_kiekis).text = "Errors made " + klaidu_kiekis.toString()
                         if (balas > 0) {
                             balas -= 1
-
                         }
                     }
                 } catch (e: NumberFormatException) {
                     mediaPlayer2.start()
-                    val answer = 0
                     view.findViewById<TextView>(R.id.Error_textView).text = "Wrong. Try Again!"
                 }
             }

@@ -233,4 +233,80 @@ class LViewModel(context: Context): ViewModel(){
         return result
     }
 
+    fun insertSwitch(state: Boolean){
+        viewModelScope.launch {
+            val i = database.Dao().getSwitchCount()
+            if (i <= 0) {
+                database.Dao().insertSwitch(
+                    SwitchState(
+                        0,
+                        state
+                    )
+                )
+            }
+        }
+    }
+
+    fun updateSwitch(state: Boolean)
+    {
+        viewModelScope.launch {
+            database.Dao().updateSwitch(state)
+        }
+    }
+
+    fun getSwitch():LiveData<Boolean>{
+        var result = MutableLiveData<Boolean>()
+        viewModelScope.launch {
+            val state = database.Dao().getSwitch()
+            result.postValue(state)
+
+        }
+
+        return result
+    }
+
+    fun insertImage(){
+        viewModelScope.launch {
+            if (database.Dao().getImgCount() == 0){
+                database.Dao().insertImage(SummaryImage(0,
+                    "perfect",
+                    "https://media.giphy.com/media/qMi9FmYD8zXH15Fcw3/giphy.gif",
+                    10))
+                database.Dao().insertImage(SummaryImage(0,
+                    "good job",
+                    "https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif",
+                    8))
+                database.Dao().insertImage(SummaryImage(0,
+                    "it's good, but it's not enough",
+                    "https://media.giphy.com/media/LluZfzq5cmmFdZN3pi/giphy.gif",
+                    6))
+                database.Dao().insertImage(SummaryImage(0,
+                    "not good",
+                    "https://media.giphy.com/media/A3t48v7vgzk1G/giphy.gif",
+                    4))
+                database.Dao().insertImage(SummaryImage(0,
+                    "it's bad",
+                    "https://media.giphy.com/media/xT1R9YUaUwR49MdDLa/giphy.gif",
+                    2))
+                database.Dao().insertImage(SummaryImage(0,
+                    "it's horrible",
+                    "https://media.giphy.com/media/oHwvYifyqlwGKNHeS4/giphy.gif",
+                    0))
+            }
+        }
+    }
+
+    fun getUrl(score: Int):LiveData<String>{
+        var result = MutableLiveData<String>()
+        viewModelScope.launch {
+            if (database.Dao().getImgUrl(score) != null){
+                result.postValue(database.Dao().getImgUrl(score))
+            }
+            else{
+                result.postValue(database.Dao().getImgUrl(score - 1))
+            }
+        }
+
+        return result
+    }
 }

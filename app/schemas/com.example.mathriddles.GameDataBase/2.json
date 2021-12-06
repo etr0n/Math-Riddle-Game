@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "dc68eb5da9f8812193ee65ad369dd4e0",
+    "identityHash": "0f9c12b36a51b5a3835ca753072f4f9d",
     "entities": [
       {
         "tableName": "Level",
@@ -103,12 +103,76 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "SwitchState",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`switchId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `switchState` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "switchId",
+            "columnName": "switchId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "switchState",
+            "columnName": "switchState",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "switchId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "SummaryImage",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`imageId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `imageName` TEXT NOT NULL, `imageUrl` TEXT NOT NULL, `imageScore` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "imageId",
+            "columnName": "imageId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageName",
+            "columnName": "imageName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "imageUrl",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageScore",
+            "columnName": "imageScore",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "imageId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dc68eb5da9f8812193ee65ad369dd4e0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0f9c12b36a51b5a3835ca753072f4f9d')"
     ]
   }
 }

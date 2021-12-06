@@ -49,4 +49,34 @@ interface Dao {
 
     @Query ("SELECT COUNT(*) From Level WHERE indicator = :indicator")
     suspend fun getProgress(indicator: Boolean): Int
+
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSwitch( switchState: SwitchState)
+
+    @Query("SELECT COUNT(*) From SwitchState ")
+    suspend fun getSwitchCount(): Int
+
+    @Query("UPDATE SwitchState SET switchState=:state")
+    suspend fun updateSwitch(state:Boolean)
+
+    @Query ("SELECT switchState From SwitchState ORDER BY switchId DESC LIMIT 1")
+    suspend fun getSwitch(): Boolean
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertImage( summaryImage: SummaryImage)
+
+    @Query ("SELECT * FROM SummaryImage WHERE imageId = :id")
+    suspend fun getImage (id: Int): SummaryImage
+
+    @Query("DELETE FROM SummaryImage")
+    suspend fun deleteImages()
+
+    @Query("SELECT COUNT(*) From SummaryImage ")
+    suspend fun getImgCount(): Int
+
+    @Query ("SELECT imageId From SummaryImage WHERE imageName = :imageName LIMIT 1")
+    suspend fun getImgId(imageName: String): Int
+
+    @Query ("SELECT imageUrl From SummaryImage WHERE imageScore = :imageScore LIMIT 1")
+    suspend fun getImgUrl(imageScore: Int): String
 }

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = arrayOf(Level::class,Statistics::class), version = 2)
+@Database(entities = arrayOf(Level::class,Statistics::class, SwitchState::class, SummaryImage::class), version = 2)
 abstract class GameDataBase : RoomDatabase() {
     abstract fun Dao(): Dao
 

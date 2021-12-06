@@ -28,6 +28,14 @@ class BAdapter(val levels: List<Level>, private val onClick:((levelId:Int)->Unit
         if(data.indicator)
         {
             holder.button.isEnabled = true
+            holder.button.setBackgroundResource(R.drawable.line_gradient_progress)
+            holder.button.backgroundTintList = null
+            holder.button.layoutParams.height = 114
+        }
+        if (!holder.button.isEnabled){
+            holder.button.setBackgroundResource(R.drawable.button_gradient)
+            holder.button.backgroundTintList = null
+            holder.button.layoutParams.height = 114
         }
         holder.button.setOnClickListener{
             when(position){

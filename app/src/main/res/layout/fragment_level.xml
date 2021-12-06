@@ -32,7 +32,7 @@
             android:layout_height="43dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:background="#121212"
+            android:background="@null"
             android:src="@drawable/abc_vector_test"
             app:layout_constraintBottom_toTopOf="@+id/c_meter"
             app:layout_constraintEnd_toStartOf="@+id/Level_textView"
@@ -47,8 +47,9 @@
             android:layout_marginStart="37dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="148dp"
+            android:background="@drawable/button_gradient"
             android:text="Submit"
-            app:backgroundTint="#845fb3"
+            app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/answer_textField" />
@@ -78,11 +79,11 @@
             android:layout_height="43dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/qm"
+            android:background="@null"
+            android:src="@android:drawable/ic_menu_help"
             app:layout_constraintBottom_toTopOf="@+id/c_meter"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/qm" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/number_textView"

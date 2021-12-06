@@ -5,8 +5,8 @@
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    tools:context=".LevelDialogFragment">
+    android:background="@null"
+    >
 
 
     <!-- TODO: Update blank fragment layout -->
@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/button_gradient"
         android:text="Watch ad for hint"
         app:layout_constraintBottom_toTopOf="@+id/textView_sol_hint"
         app:layout_constraintEnd_toEndOf="parent"

@@ -14,8 +14,9 @@
         android:layout_marginStart="142dp"
         android:layout_marginEnd="176dp"
         android:layout_marginBottom="300dp"
+        android:background="@drawable/button_gradient"
         android:text="Next level"
-        app:backgroundTint="#845fb3"
+        app:backgroundTint="@null"
         app:icon="@android:drawable/ic_media_play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,10 +74,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:src="@android:drawable/ic_lock_idle_alarm"
-        android:tint="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/timer_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoTime_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/infoTime_textView"
+        app:tint="#FFFFFF" />
 
     <TextView
         android:id="@+id/textView4_balas"

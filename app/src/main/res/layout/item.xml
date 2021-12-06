@@ -59,6 +59,7 @@
         android:id="@+id/stat_button"
         android:layout_width="54dp"
         android:layout_height="22dp"
+        android:background="@null"
         app:icon="?android:attr/actionModeFindDrawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

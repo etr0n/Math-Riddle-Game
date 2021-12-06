@@ -34,3 +34,17 @@ data class LevelWithStatistics(
     )
     val statistics: List<Statistics>
 )
+
+@Entity
+data class SwitchState(
+    @PrimaryKey(autoGenerate = true) val switchId: Int,
+    val switchState : Boolean
+)
+
+@Entity
+data class SummaryImage(
+    @PrimaryKey(autoGenerate = true) val imageId: Int,
+    val imageName : String,
+    val imageUrl : String,
+    val imageScore : Int
+)

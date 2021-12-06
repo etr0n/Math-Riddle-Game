@@ -59,6 +59,8 @@ class StartFragment : Fragment() {
 
 
         view.findViewById<Button>(R.id.settings_btn).setOnClickListener{
+            viewModel.insertSwitch(true)
+
             val action = StartFragmentDirections.actionStartFragmentToSettingsFragment()
             view.findNavController().navigate(action)
         }
@@ -77,6 +79,7 @@ class StartFragment : Fragment() {
                     .start()
             })
         })
+        viewModel.insertImage()
 
         return view
     }

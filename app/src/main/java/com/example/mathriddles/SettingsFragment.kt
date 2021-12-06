@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 
 
@@ -52,6 +53,11 @@ class SettingsFragment : Fragment() {
 
         val audioManager = requireContext().getSystemService(AudioManager::class.java)
         val sw1 = view.findViewById<Switch>(R.id.switch_sound)
+
+        viewModel.getSwitch().observe(viewLifecycleOwner, Observer {
+            sw1.isChecked = it
+        })
+
         sw1?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 audioManager.adjustStreamVolume(
@@ -59,12 +65,14 @@ class SettingsFragment : Fragment() {
                     AudioManager.ADJUST_UNMUTE,
                     0
                 )
+                viewModel.updateSwitch(true)
             } else {
                 audioManager.adjustStreamVolume(
                     AudioManager.STREAM_MUSIC,
                     AudioManager.ADJUST_MUTE,
                     0
                 )
+                viewModel.updateSwitch(false)
             }
             val message = if (isChecked) "Sound:ON" else "Sound:OFF"
             Toast.makeText(

@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,6 +22,7 @@ class SummaryFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_summary, container, false)
+        val viewModel: LViewModel by viewModels{ViewModelFactory(requireContext())}
         val args = SummaryFragmentArgs.fromBundle(requireArguments())
 
         if(args.balas > 0){
@@ -49,6 +52,16 @@ class SummaryFragment : Fragment() {
             })
 
         }
+
+        val urlImage = view.findViewById<ImageView>(R.id.urlImageView)
+
+        viewModel.getUrl(args.balas).observe(viewLifecycleOwner, Observer {
+            Glide.with(this)  //2
+                .load(it) //3
+                .error(R.drawable.lvl1)
+                .into(urlImage) //8
+        })
+
         return view
     }
     private fun convertLongToTime(time: Long): String {

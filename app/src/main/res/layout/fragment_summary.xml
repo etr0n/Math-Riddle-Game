@@ -7,13 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".SummaryFragment">
 
+    <ImageView
+        android:id="@+id/urlImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/nextlvl_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4_balas"
+        app:layout_constraintVertical_bias="0.494" />
+
     <Button
         android:id="@+id/nextlvl_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="142dp"
         android:layout_marginEnd="176dp"
-        android:layout_marginBottom="300dp"
+        android:layout_marginBottom="64dp"
         android:background="@drawable/button_gradient"
         android:text="Next level"
         app:backgroundTint="@null"
@@ -84,11 +97,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="177dp"
         android:text="TextView"
         android:textColor="#E91E63"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/nextlvl_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
